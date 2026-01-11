@@ -12,106 +12,117 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =============================
-       Dalvi Guimarães Engenharia
-       index.html (single file)
-       Tema claro corporativo (nichado)
-       ============================= */
-
     :root{
-      /* Paleta */
       --bg: #f5f5f3;
       --surface: #ffffff;
-      --surface-2: #f5f5f3;
-
+      --surface-2: #eef1f4; /* cinza claro típico de sites corporativos */
       --text: #2e2e2e;
-      --muted: #4b5563;
+      --muted: #5b6470;
 
       --primary: #0f3a5f;
       --primary-2: #1e5c8a;
 
       --line: rgba(46,46,46,.12);
-      --shadow: 0 12px 28px rgba(15,58,95,.10);
+      --shadow: 0 14px 30px rgba(15,58,95,.10);
 
-      /* Tipografia e layout */
       --font: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --radius: 18px;
-      --radius-sm: 12px;
-      --max: 1120px;
+      --radius: 16px;
+      --max: 1140px;
     }
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
     }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 20px; }
 
-    a{ color: inherit; text-decoration: none; }
-    .container{ max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    /* Top bar (muito comum no nicho) */
+    .topbar{
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+    }
+    .topbar .wrap{
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 8px 0;
+      gap: 12px;
+      opacity:.95;
+    }
+    .topbar .wrap a{ opacity:.95; }
+    .topbar .wrap a:hover{ opacity:1; text-decoration:underline; }
+    .topbar .sep{ opacity:.6; margin:0 10px; }
 
     /* Header */
     header{
-      position: sticky; top:0; z-index: 50;
+      position:sticky; top:0; z-index:50;
       background: rgba(245,245,243,.92);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
     .nav{
-      display:flex; align-items:center; justify-content: space-between;
+      display:flex; align-items:center; justify-content:space-between;
       padding: 14px 0;
       gap: 14px;
     }
     .brand{
-      display:flex; align-items:center; gap: 10px;
-      font-weight: 700; letter-spacing: .2px;
+      display:flex; align-items:center; gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
     }
     .logo{
-      width: 38px; height: 38px;
+      width: 42px; height: 42px;
       border-radius: 12px;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       box-shadow: var(--shadow);
       display:grid; place-items:center;
-      color:#ffffff;
-      font-weight: 800;
+      color:#fff;
+      font-weight: 900;
     }
+    .brand small{
+      display:block;
+      font-weight: 600;
+      color: rgba(46,46,46,.70);
+      margin-top: 2px;
+      letter-spacing: 0;
+    }
+
     nav ul{
       list-style:none; margin:0; padding:0;
       display:flex; gap: 18px; align-items:center;
     }
     nav a{
-      color: rgba(46,46,46,.75);
-      font-weight: 600;
+      color: rgba(46,46,46,.80);
+      font-weight: 700;
       font-size: 13px;
-      padding: 8px 10px;
+      padding: 10px 10px;
       border-radius: 12px;
       border: 1px solid transparent;
+      text-transform: uppercase;
+      letter-spacing: .6px;
     }
     nav a:hover{
-      color: var(--text);
-      border-color: rgba(15,58,95,.18);
       background: rgba(15,58,95,.06);
-    }
-    .nav-cta{
-      display:flex; gap: 10px; align-items:center;
+      border-color: rgba(15,58,95,.16);
+      color: var(--text);
     }
 
-    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap: 10px;
-      padding: 11px 14px;
-      border-radius: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
       border: 1px solid var(--line);
-      color: var(--text);
       background: var(--surface);
-      font-weight: 700;
+      color: var(--text);
+      font-weight: 800;
       font-size: 13px;
-      cursor: pointer;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      user-select: none;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, filter .2s ease;
       white-space: nowrap;
     }
     .btn:hover{
@@ -121,244 +132,306 @@
     .btn:active{ transform: translateY(1px); }
     .btn.primary{
       background: var(--primary);
-      color: #ffffff;
+      color:#fff;
       border-color: transparent;
     }
-    .btn.primary:hover{ filter: brightness(1.02); }
-    .btn.small{ padding: 9px 12px; border-radius: 12px; font-weight: 700; }
+    .btn.primary:hover{ filter: brightness(1.03); }
 
-    /* Hero */
-    .hero{ padding: 56px 0 26px; }
+    /* HERO (imagem + overlay, padrão do nicho) */
+    .hero{
+      position: relative;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(15,58,95,.92) 0%, rgba(15,58,95,.72) 45%, rgba(15,58,95,.30) 100%),
+        url("assets/hero.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05);
+    }
+    .hero .inner{
+      position:relative;
+      padding: 66px 0 34px;
+      color:#fff;
+    }
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 26px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
       align-items: start;
     }
-    .kicker{
-      display:inline-flex; gap: 10px; align-items:center;
-      color: var(--primary);
-      border: 1px solid rgba(15,58,95,.18);
-      background: rgba(15,58,95,.04);
-      padding: 8px 12px;
+    .tag{
+      display:inline-flex; align-items:center; gap:10px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 10px 12px;
       border-radius: 999px;
       font-weight: 800;
       font-size: 12px;
     }
     .dot{
-      width: 10px; height: 10px; border-radius: 99px;
-      background: var(--primary-2);
-      box-shadow: 0 0 0 6px rgba(30,92,138,.14);
+      width:10px; height:10px; border-radius:999px;
+      background: #fff;
+      box-shadow: 0 0 0 6px rgba(255,255,255,.12);
     }
     h1{
-      margin: 16px 0 10px;
+      margin: 16px 0 12px;
       font-size: 44px;
       line-height: 1.08;
       letter-spacing: -0.6px;
     }
     .lead{
-      margin: 0 0 18px;
-      color: var(--muted);
+      margin:0 0 18px;
+      color: rgba(255,255,255,.92);
       font-size: 15px;
-      line-height: 1.6;
-      max-width: 58ch;
+      line-height: 1.65;
+      max-width: 62ch;
     }
-    .hero-actions{ display:flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 10px; }
-    .hero-meta{
-      display:flex; gap: 12px; flex-wrap: wrap;
-      margin-top: 16px;
-      color: rgba(46,46,46,.75);
-      font-size: 12px;
+    .hero-actions{ display:flex; gap: 10px; flex-wrap:wrap; margin-top: 18px; }
+
+    .hero-card{
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(6px);
     }
-    .hero-meta span{
-      display:inline-flex; gap: 8px; align-items:center;
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface);
+    .hero-card h3{ margin:0 0 8px; font-size: 16px; }
+    .hero-card p{ margin:0 0 10px; color: rgba(255,255,255,.88); font-size: 13px; line-height: 1.55; }
+    .checklist{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+    .checklist li{
+      display:flex; gap:10px; align-items:flex-start;
+      font-size: 13px;
+      color: rgba(255,255,255,.92);
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+    }
+    .pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width: 36px;
+      padding: 6px 8px;
+      font-weight: 900;
+      border-radius: 10px;
+      background: rgba(255,255,255,.92);
+      color: var(--primary);
     }
 
-    /* Cards */
-    .card{
+    /* Faixa de números (muito usada no nicho) */
+    .metrics{
       background: var(--surface);
+      padding: 18px 0;
+    }
+    .metrics-grid{
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
+    }
+    .metric{
       border: 1px solid var(--line);
+      background: var(--surface);
       border-radius: var(--radius);
+      padding: 14px;
       box-shadow: var(--shadow);
     }
-    .card-pad{ padding: 18px; }
-    .card h3{ margin: 0 0 10px; font-size: 16px; letter-spacing: -0.2px; }
-    .card p{ margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.55; }
-
-    .list{
-      margin: 12px 0 0; padding: 0; list-style: none;
-      display:grid; gap: 10px;
+    .metric b{
+      display:block;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.2px;
     }
-    .list li{
-      display:flex; gap: 10px; align-items:flex-start;
+    .metric span{
+      display:block;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      padding: 10px 10px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      border-radius: var(--radius-sm);
-    }
-    .badge{
-      flex: 0 0 auto;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .5px;
-      color: #ffffff;
-      background: var(--primary);
-      padding: 6px 8px;
-      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.4;
     }
 
-    /* Sections */
-    section{ padding: 28px 0; }
+    /* Seções com alternância de fundo */
+    section{ padding: 46px 0; }
+    .alt{ background: var(--surface-2); border-top: 1px solid rgba(0,0,0,.03); border-bottom: 1px solid rgba(0,0,0,.03); }
+
     .section-head{
-      display:flex; align-items:flex-end; justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 14px;
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 18px;
     }
     .section-head h2{
       margin:0;
-      font-size: 22px;
-      letter-spacing: -0.2px;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      text-transform: uppercase;
     }
     .section-head p{
       margin:0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 70ch;
+      font-size: 13.5px;
+      line-height: 1.55;
+      max-width: 78ch;
     }
 
+    /* Cards de serviço com ícone circular (padrão concorrentes) */
     .grid-3{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
     }
-    .service{
-      padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+    .card{
       background: var(--surface);
-      transition: transform .08s ease, border-color .2s ease, background .2s ease;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform .08s ease, border-color .2s ease;
     }
-    .service:hover{
+    .card:hover{
       transform: translateY(-1px);
       border-color: rgba(15,58,95,.22);
-      background: #ffffff;
     }
-    .service h3{ margin: 0 0 8px; font-size: 15px; }
-    .service p{ margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-
-    .mini{
-      display:inline-flex; align-items:center; gap: 8px;
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: .45px;
+    .icon{
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      display:grid; place-items:center;
+      background: rgba(30,92,138,.12);
+      border: 1px solid rgba(30,92,138,.22);
       color: var(--primary);
-      margin-bottom: 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
     }
-    .mini i{
-      width: 10px; height: 10px; border-radius: 99px;
-      background: var(--primary-2);
-      box-shadow: 0 0 0 6px rgba(30,92,138,.14);
+    .card .k{
       display:inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .7px;
+      color: rgba(15,58,95,.9);
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
+    .card h3{ margin:0 0 8px; font-size: 16px; }
+    .card p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
 
-    /* Process */
+    /* Processo em “linha” */
     .steps{
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(4,1fr);
+      gap: 16px;
     }
     .step{
-      padding: 14px;
+      background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--surface);
+      padding: 16px;
+      box-shadow: var(--shadow);
     }
     .step .n{
-      width: 32px; height: 32px;
-      border-radius: 12px;
+      width: 34px; height: 34px;
+      border-radius: 10px;
       display:grid; place-items:center;
-      background: rgba(15,58,95,.06);
-      border: 1px solid rgba(15,58,95,.18);
+      background: var(--primary);
+      color:#fff;
       font-weight: 900;
-      color: var(--primary);
       margin-bottom: 10px;
     }
-    .step h4{ margin: 0 0 6px; font-size: 14px; }
-    .step p{ margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .step h4{ margin:0 0 6px; font-size: 15px; }
+    .step p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-    /* CTA */
+    /* CTA faixa (padrão) */
     .cta{
+      background: var(--primary);
+      color:#fff;
+      border-radius: var(--radius);
       padding: 22px;
-      border-radius: calc(var(--radius) + 4px);
-      border: 1px solid rgba(15,58,95,.22);
-      background: var(--surface);
+      display:flex; justify-content:space-between; align-items:center;
+      gap: 14px;
       box-shadow: var(--shadow);
-      display:flex; align-items:center; justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
     }
     .cta h3{ margin:0; font-size: 18px; }
-    .cta p{ margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .cta p{ margin:6px 0 0; color: rgba(255,255,255,.92); font-size: 13.5px; line-height: 1.5; }
+    .cta .btn{
+      border-color: rgba(255,255,255,.30);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+    }
+    .cta .btn:hover{ background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.40); }
+    .cta .btn.primary{
+      background:#fff;
+      color: var(--primary);
+      border-color: transparent;
+    }
 
-    /* Footer */
+    /* Footer escuro (muito comum) */
     footer{
-      padding: 22px 0 34px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-      margin-top: 24px;
-      font-size: 12px;
+      margin-top: 44px;
+      background: #0b2d4a;
+      color: rgba(255,255,255,.88);
+      padding: 34px 0;
     }
     .footer-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
+      gap: 18px;
       align-items:start;
     }
     .footer-links{
-      display:flex; gap: 10px; flex-wrap: wrap; justify-content:flex-end;
+      display:flex; gap: 10px; flex-wrap:wrap; justify-content:flex-end;
     }
     .footer-links a{
-      padding: 8px 10px;
-      border: 1px solid var(--line);
+      padding: 10px 12px;
       border-radius: 12px;
-      background: var(--surface);
-      color: rgba(46,46,46,.78);
-      font-weight: 700;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      font-weight: 800;
+      font-size: 12px;
     }
-    .footer-links a:hover{ color: var(--text); background: rgba(15,58,95,.06); border-color: rgba(15,58,95,.22); }
+    .footer-links a:hover{ background: rgba(255,255,255,.10); }
 
     /* Responsive */
     @media (max-width: 980px){
+      nav ul{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 38px; }
+      h1{ font-size: 36px; }
+      .metrics-grid{ grid-template-columns: 1fr 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .steps{ grid-template-columns: 1fr; }
-      nav ul{ display:none; }
       .footer-grid{ grid-template-columns: 1fr; }
       .footer-links{ justify-content:flex-start; }
+      .cta{ flex-direction:column; align-items:flex-start; }
     }
   </style>
 </head>
 
 <body>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container">
+      <div class="wrap">
+        <div>
+          <a href="mailto:contato@dalviguimaraes.eng.br">contato@dalviguimaraes.eng.br</a>
+          <span class="sep">•</span>
+          <a href="tel:+55SEUNUMEROAQUI">(XX) XXXXX-XXXX</a>
+        </div>
+        <div>
+          <a href="#contato">Solicitar orçamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="container">
       <div class="nav">
         <a class="brand" href="#top" aria-label="Ir para o topo">
           <div class="logo" aria-hidden="true">DG</div>
           <div>
-            <div>Dalvi Guimarães Engenharia</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;">
-              Projetos e estudos elétricos • Baixa e Média Tensão
-            </div>
+            Dalvi Guimarães Engenharia
+            <small>Projetos e estudos elétricos • BT/MT • SPDA e aterramento</small>
           </div>
         </a>
 
@@ -371,50 +444,57 @@
           </ul>
         </nav>
 
-        <div class="nav-cta">
-          <a class="btn small" href="#contato">Solicitar orçamento</a>
-          <a class="btn primary small" href="#servicos">Ver serviços</a>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn" href="#servicos">Ver serviços</a>
+          <a class="btn primary" href="#contato">Falar com a engenharia</a>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- HERO -->
   <main id="top">
-    <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="kicker"><span class="dot" aria-hidden="true"></span> Engenharia elétrica com foco técnico, rastreável e normatizado</div>
-            <h1>Projetos elétricos com documentação clara e responsabilidade técnica.</h1>
-            <p class="lead">
-              Atuação em <strong>projetos, laudos e estudos</strong> para instalações de baixa e média tensão, com
-              ênfase em conformidade normativa, padronização de entregáveis e suporte técnico do início à execução.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn primary" href="#contato">Falar com a engenharia</a>
-              <a class="btn" href="#servicos">Conhecer escopo</a>
-              <a class="btn" href="#processo">Como trabalhamos</a>
+        <div class="inner">
+          <div class="hero-grid">
+            <div>
+              <div class="tag"><span class="dot"></span> Engenharia elétrica com foco técnico, normatizado e rastreável</div>
+              <h1>Projetos elétricos com clareza de escopo e documentação pronta para execução.</h1>
+              <p class="lead">
+                Atuação em <strong>projetos, laudos e estudos</strong> para instalações de baixa e média tensão,
+                com ênfase em conformidade normativa e entregáveis organizados para aprovação, compra e obra.
+              </p>
+              <div class="hero-actions">
+                <a class="btn primary" href="#contato">Solicitar orçamento</a>
+                <a class="btn" href="#processo">Como funciona</a>
+                <a class="btn" href="#servicos">Escopo de serviços</a>
+              </div>
             </div>
 
-            <div class="hero-meta" aria-label="Indicadores de posicionamento">
-              <span>✓ Entregáveis padronizados</span>
-              <span>✓ Memorial + ART (quando aplicável)</span>
-              <span>✓ Compatibilização e revisão</span>
-            </div>
+            <aside class="hero-card" aria-label="Resumo do que entregamos">
+              <h3>O que você recebe</h3>
+              <p>Pacote técnico padronizado para reduzir retrabalho e acelerar decisão/obra.</p>
+              <ul class="checklist">
+                <li><span class="pill">01</span> Plantas e diagramas (unifilar, layouts e detalhes)</li>
+                <li><span class="pill">02</span> Memorial descritivo e premissas de dimensionamento</li>
+                <li><span class="pill">03</span> Relatórios técnicos e recomendações de adequação</li>
+                <li><span class="pill">04</span> Suporte pós-entrega (no escopo combinado)</li>
+              </ul>
+            </aside>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <aside class="card card-pad" aria-label="Resumo do que entregamos">
-            <h3>O que você recebe</h3>
-            <p>Pacote técnico pensado para reduzir retrabalho e facilitar aprovação, compra e execução.</p>
-            <ul class="list">
-              <li><span class="badge">01</span> Plantas e diagramas (unifilar, detalhes e layouts)</li>
-              <li><span class="badge">02</span> Memorial descritivo e lista de materiais (quando aplicável)</li>
-              <li><span class="badge">03</span> Relatórios técnicos e recomendações de adequação</li>
-              <li><span class="badge">04</span> Suporte para ajustes pós-revisão/obra (escopo combinado)</li>
-            </ul>
-          </aside>
+    <!-- MÉTRICAS -->
+    <section class="metrics" aria-label="Indicadores">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric"><b>BT/MT</b><span>Projetos e estudos de baixa e média tensão</span></div>
+          <div class="metric"><b>SPDA</b><span>Documentação e adequações com premissas claras</span></div>
+          <div class="metric"><b>Laudos</b><span>Inspeções, não conformidades e recomendações</span></div>
+          <div class="metric"><b>Entrega</b><span>Pacote organizado para execução e aprovação</span></div>
         </div>
       </div>
     </section>
@@ -430,38 +510,44 @@
         </div>
 
         <div class="grid-3">
-          <div class="service">
-            <div class="mini"><i></i>PROJETOS</div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <span class="k">PROJETOS</span>
             <h3>Projetos elétricos BT/MT</h3>
             <p>Distribuição, quadros, alimentadores, diagrama unifilar, detalhamento e compatibilização.</p>
           </div>
 
-          <div class="service">
-            <div class="mini"><i></i>SPDA</div>
+          <div class="card">
+            <div class="icon">⛈</div>
+            <span class="k">SPDA</span>
             <h3>SPDA e aterramento</h3>
             <p>Dimensionamento e documentação conforme premissas normativas, com foco em execução rastreável.</p>
           </div>
 
-          <div class="service">
-            <div class="mini"><i></i>LAUDOS</div>
+          <div class="card">
+            <div class="icon">📋</div>
+            <span class="k">LAUDOS</span>
             <h3>Laudos e inspeções</h3>
             <p>Vistorias, registros fotográficos, não conformidades e recomendações objetivas de adequação.</p>
           </div>
 
-          <div class="service">
-            <div class="mini"><i></i>ESTUDOS</div>
+          <div class="card">
+            <div class="icon">📈</div>
+            <span class="k">ESTUDOS</span>
             <h3>Estudos técnicos</h3>
             <p>Curto-circuito, coordenação, ajustes, verificações e análises conforme objetivo do cliente.</p>
           </div>
 
-          <div class="service">
-            <div class="mini"><i></i>APROVAÇÃO</div>
+          <div class="card">
+            <div class="icon">🏢</div>
+            <span class="k">APROVAÇÃO</span>
             <h3>Entrada de energia e padrões</h3>
             <p>Documentos e desenhos para aprovação junto à concessionária, conforme padrão local aplicável.</p>
           </div>
 
-          <div class="service">
-            <div class="mini"><i></i>FV &amp; BESS</div>
+          <div class="card">
+            <div class="icon">🔋</div>
+            <span class="k">FV &amp; BESS</span>
             <h3>Suporte técnico FV e armazenamento</h3>
             <p>Apoio em documentação e estudos específicos (escopo sob demanda) para sistemas existentes.</p>
           </div>
@@ -470,7 +556,7 @@
     </section>
 
     <!-- DIFERENCIAIS -->
-    <section id="diferenciais">
+    <section id="diferenciais" class="alt">
       <div class="container">
         <div class="section-head">
           <div>
@@ -480,15 +566,21 @@
         </div>
 
         <div class="grid-3">
-          <div class="service">
+          <div class="card">
+            <div class="icon">🧾</div>
+            <span class="k">PADRÃO</span>
             <h3>Padronização e organização</h3>
             <p>Pacotes consistentes, com nomenclatura, revisões e escopo definido para facilitar gestão.</p>
           </div>
-          <div class="service">
+          <div class="card">
+            <div class="icon">🧠</div>
+            <span class="k">DECISÃO</span>
             <h3>Decisão baseada em dados</h3>
             <p>Relatórios com premissas explícitas e recomendações objetivas, reduzindo subjetividade.</p>
           </div>
-          <div class="service">
+          <div class="card">
+            <div class="icon">🛠</div>
+            <span class="k">CAMPO</span>
             <h3>Interface com campo</h3>
             <p>Entregáveis pensados para execução: detalhes, listas e orientações técnicas aplicáveis.</p>
           </div>
@@ -501,7 +593,7 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Processo de trabalho</h2>
+            <h2>Processo</h2>
             <p>Fluxo simples e rastreável, com marcos claros de validação e revisão.</p>
           </div>
         </div>
@@ -532,17 +624,14 @@
     </section>
 
     <!-- CTA / CONTATO -->
-    <section id="contato">
+    <section id="contato" class="alt">
       <div class="container">
         <div class="cta">
           <div>
             <h3>Vamos alinhar o escopo e fechar um orçamento técnico.</h3>
-            <p>
-              Envie um resumo do objetivo, localização e documentos disponíveis (diagrama, fotos, padrão da concessionária).
-            </p>
+            <p>Envie um resumo do objetivo, localização e documentos disponíveis (diagrama, fotos, padrão da concessionária).</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <!-- Troque pelos seus links reais -->
             <a class="btn primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
             <a class="btn" href="mailto:contato@dalviguimaraes.eng.br">E-mail</a>
             <a class="btn" href="#servicos">Ver serviços</a>
@@ -555,11 +644,11 @@
       <div class="container">
         <div class="footer-grid">
           <div>
-            <div style="font-weight:800;color:var(--text);">Dalvi Guimarães Engenharia</div>
-            <div style="margin-top:6px;">
+            <div style="font-weight:900; font-size:14px; letter-spacing:.2px;">Dalvi Guimarães Engenharia</div>
+            <div style="margin-top:8px; opacity:.92;">
               Projetos e estudos elétricos • Documentação técnica • BT/MT
             </div>
-            <div style="margin-top:10px;color:var(--muted);">
+            <div style="margin-top:10px; opacity:.82; font-size:12px;">
               © <span id="year"></span> • Todos os direitos reservados.
             </div>
           </div>
