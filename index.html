@@ -9,59 +9,72 @@
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #f5f5f3;
-      --surface: #ffffff;
-      --surface-2: #eef1f4; /* cinza claro típico de sites corporativos */
-      --text: #2e2e2e;
-      --muted: #5b6470;
+      /* Base (sua identidade) */
+      --brand-900:#0f3a5f;
+      --brand-700:#1e5c8a;
 
-      --primary: #0f3a5f;
-      --primary-2: #1e5c8a;
+      /* Luxo (acento dourado) */
+      --gold:#c8a85a;          /* dourado elegante */
+      --gold-2:#e3c77a;        /* highlight */
 
-      --line: rgba(46,46,46,.12);
-      --shadow: 0 14px 30px rgba(15,58,95,.10);
+      /* Dark premium */
+      --bg:#070a10;            /* preto/azul profundo */
+      --bg-2:#0b1220;          /* navy profundo */
+      --surface:rgba(255,255,255,.06);
+      --surface-2:rgba(255,255,255,.09);
 
-      --font: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --radius: 16px;
-      --max: 1140px;
+      --text:#f5f5f3;
+      --muted:rgba(245,245,243,.72);
+      --line:rgba(245,245,243,.14);
+
+      --shadow: 0 18px 46px rgba(0,0,0,.45);
+
+      --font:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --radius:18px;
+      --radius-sm:12px;
+      --max: 1160px;
     }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family:var(--font);
-      background:var(--bg);
-      color:var(--text);
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 18% -10%, rgba(30,92,138,.22), transparent 60%),
+        radial-gradient(900px 520px at 90% 0%, rgba(200,168,90,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
     }
-    a{ color:inherit; text-decoration:none; }
-    .container{ max-width:var(--max); margin:0 auto; padding:0 20px; }
 
-    /* Top bar (muito comum no nicho) */
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width: var(--max); margin:0 auto; padding:0 22px; }
+
+    /* Topbar (premium) */
     .topbar{
-      background: var(--primary);
-      color: #fff;
-      font-size: 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(7,10,16,.55);
+      backdrop-filter: blur(10px);
     }
     .topbar .wrap{
-      display:flex; justify-content:space-between; align-items:center;
-      padding: 8px 0;
-      gap: 12px;
-      opacity:.95;
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      padding: 10px 0;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .3px;
     }
-    .topbar .wrap a{ opacity:.95; }
-    .topbar .wrap a:hover{ opacity:1; text-decoration:underline; }
-    .topbar .sep{ opacity:.6; margin:0 10px; }
+    .topbar a{ color: var(--muted); }
+    .topbar a:hover{ color: var(--text); }
 
     /* Header */
     header{
-      position:sticky; top:0; z-index:50;
-      background: rgba(245,245,243,.92);
-      backdrop-filter: blur(10px);
+      position: sticky; top:0; z-index: 60;
+      background: rgba(7,10,16,.62);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
     .nav{
@@ -72,311 +85,330 @@
     .brand{
       display:flex; align-items:center; gap: 12px;
       font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .logo{
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: var(--shadow);
-      display:grid; place-items:center;
-      color:#fff;
-      font-weight: 900;
+      letter-spacing: .6px;
+      text-transform: uppercase;
     }
     .brand small{
       display:block;
+      margin-top: 4px;
       font-weight: 600;
-      color: rgba(46,46,46,.70);
-      margin-top: 2px;
-      letter-spacing: 0;
+      letter-spacing: .25px;
+      color: var(--muted);
+      text-transform:none;
+    }
+    .logo{
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(15,58,95,.95), rgba(30,92,138,.85));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(245,245,243,.16);
+      display:grid; place-items:center;
+      color: #fff;
+      font-weight: 900;
     }
 
     nav ul{
       list-style:none; margin:0; padding:0;
-      display:flex; gap: 18px; align-items:center;
+      display:flex; align-items:center; gap: 18px;
     }
     nav a{
-      color: rgba(46,46,46,.80);
-      font-weight: 700;
-      font-size: 13px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .9px;
+      text-transform: uppercase;
       padding: 10px 10px;
       border-radius: 12px;
       border: 1px solid transparent;
-      text-transform: uppercase;
-      letter-spacing: .6px;
     }
     nav a:hover{
-      background: rgba(15,58,95,.06);
-      border-color: rgba(15,58,95,.16);
       color: var(--text);
+      border-color: rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
     }
 
+    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap: 10px;
       padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--surface);
+      border-radius: 14px;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
       color: var(--text);
-      font-weight: 800;
-      font-size: 13px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
       cursor:pointer;
       transition: transform .08s ease, background .2s ease, border-color .2s ease, filter .2s ease;
       white-space: nowrap;
     }
     .btn:hover{
-      background: rgba(15,58,95,.06);
-      border-color: rgba(15,58,95,.22);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(245,245,243,.24);
     }
     .btn:active{ transform: translateY(1px); }
-    .btn.primary{
-      background: var(--primary);
-      color:#fff;
+
+    .btn.gold{
+      background: linear-gradient(135deg, rgba(200,168,90,.95), rgba(227,199,122,.82));
+      color: #0b1220;
       border-color: transparent;
     }
-    .btn.primary:hover{ filter: brightness(1.03); }
+    .btn.gold:hover{ filter: brightness(1.03); }
 
-    /* HERO (imagem + overlay, padrão do nicho) */
+    .btn.ghost{
+      background: transparent;
+    }
+
+    /* HERO (Dubai-like) */
     .hero{
       position: relative;
-      background: var(--surface);
       border-bottom: 1px solid var(--line);
+      overflow: hidden;
     }
     .hero::before{
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(15,58,95,.92) 0%, rgba(15,58,95,.72) 45%, rgba(15,58,95,.30) 100%),
+        linear-gradient(90deg, rgba(7,10,16,.92) 0%, rgba(7,10,16,.78) 45%, rgba(7,10,16,.35) 100%),
+        radial-gradient(700px 450px at 20% 10%, rgba(30,92,138,.25), transparent 60%),
         url("assets/hero.jpg");
       background-size: cover;
       background-position: center;
-      filter: saturate(1.05);
+      filter: saturate(1.08) contrast(1.05);
+      transform: scale(1.02);
     }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(7,10,16,.15) 55%, rgba(7,10,16,.55) 100%);
+      pointer-events:none;
+    }
+
     .hero .inner{
       position:relative;
-      padding: 66px 0 34px;
-      color:#fff;
+      padding: 76px 0 42px;
     }
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.1fr .9fr;
       gap: 22px;
       align-items: start;
     }
-    .tag{
-      display:inline-flex; align-items:center; gap:10px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
+      color: rgba(245,245,243,.88);
       font-weight: 800;
       font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
     }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: #fff;
-      box-shadow: 0 0 0 6px rgba(255,255,255,.12);
+    .kdot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(200,168,90,.12);
     }
     h1{
-      margin: 16px 0 12px;
-      font-size: 44px;
-      line-height: 1.08;
+      margin: 18px 0 12px;
+      font-size: 46px;
+      line-height: 1.07;
       letter-spacing: -0.6px;
     }
     .lead{
-      margin:0 0 18px;
-      color: rgba(255,255,255,.92);
+      margin:0;
+      color: rgba(245,245,243,.85);
       font-size: 15px;
-      line-height: 1.65;
-      max-width: 62ch;
+      line-height: 1.7;
+      max-width: 68ch;
     }
-    .hero-actions{ display:flex; gap: 10px; flex-wrap:wrap; margin-top: 18px; }
+    .hero-actions{
+      display:flex; gap: 10px; flex-wrap: wrap;
+      margin-top: 20px;
+    }
 
-    .hero-card{
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.20);
+    /* “Luxury” info cards */
+    .glass{
+      border: 1px solid rgba(245,245,243,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border-radius: var(--radius);
-      padding: 18px;
-      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
-    .hero-card h3{ margin:0 0 8px; font-size: 16px; }
-    .hero-card p{ margin:0 0 10px; color: rgba(255,255,255,.88); font-size: 13px; line-height: 1.55; }
-    .checklist{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+    .pad{ padding: 18px; }
+    .glass h3{ margin:0 0 10px; font-size: 16px; letter-spacing: -.2px; }
+    .glass p{ margin:0 0 12px; color: rgba(245,245,243,.75); font-size: 13px; line-height: 1.6; }
+
+    .checklist{
+      margin: 0; padding: 0; list-style:none;
+      display:grid; gap:10px;
+    }
     .checklist li{
-      display:flex; gap:10px; align-items:flex-start;
-      font-size: 13px;
-      color: rgba(255,255,255,.92);
+      display:flex; gap: 10px; align-items:flex-start;
       padding: 10px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      color: rgba(245,245,243,.86);
+      font-size: 13px;
+      line-height: 1.5;
     }
-    .pill{
-      display:inline-flex; align-items:center; justify-content:center;
-      min-width: 36px;
-      padding: 6px 8px;
+    .badge{
+      flex: 0 0 auto;
       font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #0b1220;
+      background: linear-gradient(135deg, rgba(200,168,90,.95), rgba(227,199,122,.82));
+      padding: 6px 8px;
       border-radius: 10px;
-      background: rgba(255,255,255,.92);
-      color: var(--primary);
     }
 
-    /* Faixa de números (muito usada no nicho) */
+    /* Metrics (assinatura premium) */
     .metrics{
-      background: var(--surface);
-      padding: 18px 0;
+      padding: 18px 0 0;
     }
     .metrics-grid{
       display:grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 14px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
     .metric{
-      border: 1px solid var(--line);
-      background: var(--surface);
-      border-radius: var(--radius);
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
       padding: 14px;
-      box-shadow: var(--shadow);
     }
     .metric b{
       display:block;
-      font-size: 20px;
-      color: var(--primary);
-      letter-spacing: -0.2px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+      color: rgba(245,245,243,.92);
     }
     .metric span{
       display:block;
-      margin-top: 4px;
-      color: var(--muted);
+      margin-top: 6px;
+      color: rgba(245,245,243,.70);
       font-size: 12.5px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    /* Seções com alternância de fundo */
-    section{ padding: 46px 0; }
-    .alt{ background: var(--surface-2); border-top: 1px solid rgba(0,0,0,.03); border-bottom: 1px solid rgba(0,0,0,.03); }
-
+    /* Sections */
+    section{ padding: 54px 0; }
     .section-head{
-      display:flex; align-items:flex-end; justify-content:space-between;
+      display:flex; align-items:flex-end; justify-content: space-between;
       gap: 16px;
       margin-bottom: 18px;
     }
     .section-head h2{
       margin:0;
-      font-size: 24px;
-      letter-spacing: -0.3px;
-      color: var(--primary);
+      font-size: 20px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
+      color: rgba(245,245,243,.92);
     }
     .section-head p{
       margin:0;
-      color: var(--muted);
+      color: rgba(245,245,243,.72);
       font-size: 13.5px;
-      line-height: 1.55;
+      line-height: 1.6;
       max-width: 78ch;
     }
 
-    /* Cards de serviço com ícone circular (padrão concorrentes) */
     .grid-3{
       display:grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
     .card{
-      background: var(--surface);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: var(--shadow);
-      transition: transform .08s ease, border-color .2s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
+      transition: transform .08s ease, border-color .2s ease, background .2s ease;
     }
     .card:hover{
       transform: translateY(-1px);
-      border-color: rgba(15,58,95,.22);
+      border-color: rgba(200,168,90,.35);
+      background: rgba(255,255,255,.05);
     }
-    .icon{
-      width: 44px; height: 44px;
-      border-radius: 999px;
-      display:grid; place-items:center;
-      background: rgba(30,92,138,.12);
-      border: 1px solid rgba(30,92,138,.22);
-      color: var(--primary);
+    .eyebrow{
+      display:inline-flex; align-items:center; gap: 10px;
       font-weight: 900;
-      margin-bottom: 12px;
-    }
-    .card .k{
-      display:inline-block;
       font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .7px;
-      color: rgba(15,58,95,.9);
+      letter-spacing: 1.0px;
       text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .card h3{ margin:0 0 8px; font-size: 16px; }
-    .card p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-
-    /* Processo em “linha” */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 16px;
-    }
-    .step{
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .step .n{
-      width: 34px; height: 34px;
-      border-radius: 10px;
-      display:grid; place-items:center;
-      background: var(--primary);
-      color:#fff;
-      font-weight: 900;
+      color: rgba(245,245,243,.78);
       margin-bottom: 10px;
     }
-    .step h4{ margin:0 0 6px; font-size: 15px; }
-    .step p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .eyebrow i{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(200,168,90,.10);
+      display:inline-block;
+    }
+    .card h3{ margin:0 0 8px; font-size: 16px; }
+    .card p{ margin:0; color: rgba(245,245,243,.70); font-size: 13.5px; line-height: 1.6; }
 
-    /* CTA faixa (padrão) */
-    .cta{
-      background: var(--primary);
-      color:#fff;
+    /* Process */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .step{
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
       border-radius: var(--radius);
+      padding: 16px;
+    }
+    .step .n{
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      font-weight: 900;
+      color: #0b1220;
+      background: linear-gradient(135deg, rgba(200,168,90,.95), rgba(227,199,122,.82));
+      margin-bottom: 10px;
+    }
+    .step h4{ margin:0 0 6px; font-size: 14px; }
+    .step p{ margin:0; color: rgba(245,245,243,.70); font-size: 12.8px; line-height: 1.55; }
+
+    /* CTA */
+    .cta{
+      border: 1px solid rgba(200,168,90,.32);
+      background:
+        radial-gradient(700px 260px at 20% 0%, rgba(200,168,90,.18), transparent 62%),
+        radial-gradient(700px 260px at 85% 100%, rgba(30,92,138,.18), transparent 62%),
+        rgba(255,255,255,.03);
+      border-radius: calc(var(--radius) + 2px);
       padding: 22px;
-      display:flex; justify-content:space-between; align-items:center;
+      display:flex; align-items:center; justify-content: space-between;
       gap: 14px;
-      box-shadow: var(--shadow);
+      flex-wrap: wrap;
     }
     .cta h3{ margin:0; font-size: 18px; }
-    .cta p{ margin:6px 0 0; color: rgba(255,255,255,.92); font-size: 13.5px; line-height: 1.5; }
-    .cta .btn{
-      border-color: rgba(255,255,255,.30);
-      background: rgba(255,255,255,.10);
-      color:#fff;
-    }
-    .cta .btn:hover{ background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.40); }
-    .cta .btn.primary{
-      background:#fff;
-      color: var(--primary);
-      border-color: transparent;
-    }
+    .cta p{ margin:6px 0 0; color: rgba(245,245,243,.75); font-size: 13.5px; line-height: 1.55; }
 
-    /* Footer escuro (muito comum) */
+    /* Footer */
     footer{
-      margin-top: 44px;
-      background: #0b2d4a;
-      color: rgba(255,255,255,.88);
-      padding: 34px 0;
+      margin-top: 32px;
+      border-top: 1px solid rgba(245,245,243,.14);
+      padding: 28px 0 40px;
+      color: rgba(245,245,243,.72);
+      font-size: 12px;
     }
     .footer-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
+      gap: 16px;
       align-items:start;
     }
     .footer-links{
@@ -384,37 +416,38 @@
     }
     .footer-links a{
       padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      font-weight: 800;
-      font-size: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      font-weight: 900;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(245,245,243,.82);
     }
-    .footer-links a:hover{ background: rgba(255,255,255,.10); }
+    .footer-links a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
 
     /* Responsive */
     @media (max-width: 980px){
       nav ul{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 36px; }
+      h1{ font-size: 38px; }
       .metrics-grid{ grid-template-columns: 1fr 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .steps{ grid-template-columns: 1fr; }
       .footer-grid{ grid-template-columns: 1fr; }
       .footer-links{ justify-content:flex-start; }
-      .cta{ flex-direction:column; align-items:flex-start; }
     }
   </style>
 </head>
 
 <body>
-  <!-- TOP BAR -->
   <div class="topbar">
     <div class="container">
       <div class="wrap">
         <div>
           <a href="mailto:contato@dalviguimaraes.eng.br">contato@dalviguimaraes.eng.br</a>
-          <span class="sep">•</span>
+          <span style="opacity:.55; margin:0 10px;">•</span>
           <a href="tel:+55SEUNUMEROAQUI">(XX) XXXXX-XXXX</a>
         </div>
         <div>
@@ -445,41 +478,50 @@
         </nav>
 
         <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn" href="#servicos">Ver serviços</a>
-          <a class="btn primary" href="#contato">Falar com a engenharia</a>
+          <a class="btn ghost" href="#servicos">Ver serviços</a>
+          <a class="btn gold" href="#contato">Falar com a engenharia</a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
   <main id="top">
     <section class="hero">
       <div class="container">
         <div class="inner">
           <div class="hero-grid">
             <div>
-              <div class="tag"><span class="dot"></span> Engenharia elétrica com foco técnico, normatizado e rastreável</div>
-              <h1>Projetos elétricos com clareza de escopo e documentação pronta para execução.</h1>
+              <div class="kicker"><span class="kdot"></span> Engenharia premium • execução orientada por normas</div>
+              <h1>Engenharia elétrica com padrão de entrega para obras de alto nível.</h1>
               <p class="lead">
                 Atuação em <strong>projetos, laudos e estudos</strong> para instalações de baixa e média tensão,
-                com ênfase em conformidade normativa e entregáveis organizados para aprovação, compra e obra.
+                com foco em conformidade normativa, rastreabilidade e documentação pronta para obra.
               </p>
+
               <div class="hero-actions">
-                <a class="btn primary" href="#contato">Solicitar orçamento</a>
-                <a class="btn" href="#processo">Como funciona</a>
-                <a class="btn" href="#servicos">Escopo de serviços</a>
+                <a class="btn gold" href="#contato">Solicitar orçamento</a>
+                <a class="btn" href="#processo">Como trabalhamos</a>
+                <a class="btn ghost" href="#servicos">Escopo de serviços</a>
+              </div>
+
+              <div class="metrics" aria-label="Indicadores">
+                <div class="metrics-grid">
+                  <div class="metric"><b>BT/MT</b><span>Projetos e estudos de baixa e média tensão</span></div>
+                  <div class="metric"><b>SPDA</b><span>Documentação e adequação com premissas claras</span></div>
+                  <div class="metric"><b>Laudos</b><span>Inspeções, não conformidades e recomendações</span></div>
+                  <div class="metric"><b>Entrega</b><span>Pacote organizado para execução e aprovação</span></div>
+                </div>
               </div>
             </div>
 
-            <aside class="hero-card" aria-label="Resumo do que entregamos">
+            <aside class="glass pad" aria-label="Resumo do que entregamos">
               <h3>O que você recebe</h3>
-              <p>Pacote técnico padronizado para reduzir retrabalho e acelerar decisão/obra.</p>
+              <p>Pacote técnico padronizado para reduzir retrabalho e elevar a qualidade da execução.</p>
               <ul class="checklist">
-                <li><span class="pill">01</span> Plantas e diagramas (unifilar, layouts e detalhes)</li>
-                <li><span class="pill">02</span> Memorial descritivo e premissas de dimensionamento</li>
-                <li><span class="pill">03</span> Relatórios técnicos e recomendações de adequação</li>
-                <li><span class="pill">04</span> Suporte pós-entrega (no escopo combinado)</li>
+                <li><span class="badge">01</span> Plantas e diagramas (unifilar, layouts e detalhes)</li>
+                <li><span class="badge">02</span> Memorial descritivo e premissas de dimensionamento</li>
+                <li><span class="badge">03</span> Relatórios técnicos e recomendações de adequação</li>
+                <li><span class="badge">04</span> Suporte pós-entrega (no escopo combinado)</li>
               </ul>
             </aside>
           </div>
@@ -487,67 +529,43 @@
       </div>
     </section>
 
-    <!-- MÉTRICAS -->
-    <section class="metrics" aria-label="Indicadores">
-      <div class="container">
-        <div class="metrics-grid">
-          <div class="metric"><b>BT/MT</b><span>Projetos e estudos de baixa e média tensão</span></div>
-          <div class="metric"><b>SPDA</b><span>Documentação e adequações com premissas claras</span></div>
-          <div class="metric"><b>Laudos</b><span>Inspeções, não conformidades e recomendações</span></div>
-          <div class="metric"><b>Entrega</b><span>Pacote organizado para execução e aprovação</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVIÇOS -->
     <section id="servicos">
       <div class="container">
         <div class="section-head">
           <div>
             <h2>Serviços</h2>
-            <p>Escopos típicos para empresas, comércios, condomínios e usinas em operação (baixa/média tensão).</p>
+            <p>Escopos típicos para empresas, condomínios e operações industriais (baixa e média tensão).</p>
           </div>
         </div>
 
         <div class="grid-3">
           <div class="card">
-            <div class="icon">⚡</div>
-            <span class="k">PROJETOS</span>
+            <div class="eyebrow"><i></i>PROJETOS</div>
             <h3>Projetos elétricos BT/MT</h3>
             <p>Distribuição, quadros, alimentadores, diagrama unifilar, detalhamento e compatibilização.</p>
           </div>
-
           <div class="card">
-            <div class="icon">⛈</div>
-            <span class="k">SPDA</span>
+            <div class="eyebrow"><i></i>SPDA</div>
             <h3>SPDA e aterramento</h3>
-            <p>Dimensionamento e documentação conforme premissas normativas, com foco em execução rastreável.</p>
+            <p>Dimensionamento e documentação com premissas normativas e foco em execução rastreável.</p>
           </div>
-
           <div class="card">
-            <div class="icon">📋</div>
-            <span class="k">LAUDOS</span>
+            <div class="eyebrow"><i></i>LAUDOS</div>
             <h3>Laudos e inspeções</h3>
             <p>Vistorias, registros fotográficos, não conformidades e recomendações objetivas de adequação.</p>
           </div>
-
           <div class="card">
-            <div class="icon">📈</div>
-            <span class="k">ESTUDOS</span>
+            <div class="eyebrow"><i></i>ESTUDOS</div>
             <h3>Estudos técnicos</h3>
-            <p>Curto-circuito, coordenação, ajustes, verificações e análises conforme objetivo do cliente.</p>
+            <p>Curto-circuito, coordenação, verificações e análises conforme objetivo do cliente.</p>
           </div>
-
           <div class="card">
-            <div class="icon">🏢</div>
-            <span class="k">APROVAÇÃO</span>
+            <div class="eyebrow"><i></i>APROVAÇÃO</div>
             <h3>Entrada de energia e padrões</h3>
-            <p>Documentos e desenhos para aprovação junto à concessionária, conforme padrão local aplicável.</p>
+            <p>Documentos e desenhos para aprovação conforme padrão local aplicável.</p>
           </div>
-
           <div class="card">
-            <div class="icon">🔋</div>
-            <span class="k">FV &amp; BESS</span>
+            <div class="eyebrow"><i></i>FV &amp; BESS</div>
             <h3>Suporte técnico FV e armazenamento</h3>
             <p>Apoio em documentação e estudos específicos (escopo sob demanda) para sistemas existentes.</p>
           </div>
@@ -555,8 +573,7 @@
       </div>
     </section>
 
-    <!-- DIFERENCIAIS -->
-    <section id="diferenciais" class="alt">
+    <section id="diferenciais">
       <div class="container">
         <div class="section-head">
           <div>
@@ -567,20 +584,17 @@
 
         <div class="grid-3">
           <div class="card">
-            <div class="icon">🧾</div>
-            <span class="k">PADRÃO</span>
+            <div class="eyebrow"><i></i>PADRÃO</div>
             <h3>Padronização e organização</h3>
-            <p>Pacotes consistentes, com nomenclatura, revisões e escopo definido para facilitar gestão.</p>
+            <p>Pacotes consistentes, nomenclatura, revisões e escopo definido para facilitar gestão.</p>
           </div>
           <div class="card">
-            <div class="icon">🧠</div>
-            <span class="k">DECISÃO</span>
+            <div class="eyebrow"><i></i>DADOS</div>
             <h3>Decisão baseada em dados</h3>
-            <p>Relatórios com premissas explícitas e recomendações objetivas, reduzindo subjetividade.</p>
+            <p>Premissas explícitas e recomendações objetivas, reduzindo subjetividade e retrabalho.</p>
           </div>
           <div class="card">
-            <div class="icon">🛠</div>
-            <span class="k">CAMPO</span>
+            <div class="eyebrow"><i></i>OBRA</div>
             <h3>Interface com campo</h3>
             <p>Entregáveis pensados para execução: detalhes, listas e orientações técnicas aplicáveis.</p>
           </div>
@@ -588,13 +602,12 @@
       </div>
     </section>
 
-    <!-- PROCESSO -->
     <section id="processo">
       <div class="container">
         <div class="section-head">
           <div>
             <h2>Processo</h2>
-            <p>Fluxo simples e rastreável, com marcos claros de validação e revisão.</p>
+            <p>Fluxo simples, rastreável e com marcos claros de validação e revisão.</p>
           </div>
         </div>
 
@@ -623,44 +636,45 @@
       </div>
     </section>
 
-    <!-- CTA / CONTATO -->
-    <section id="contato" class="alt">
+    <section id="contato">
       <div class="container">
         <div class="cta">
           <div>
             <h3>Vamos alinhar o escopo e fechar um orçamento técnico.</h3>
-            <p>Envie um resumo do objetivo, localização e documentos disponíveis (diagrama, fotos, padrão da concessionária).</p>
+            <p>Envie objetivo, localização e documentos disponíveis (diagrama, fotos, padrão da concessionária).</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn gold" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
             <a class="btn" href="mailto:contato@dalviguimaraes.eng.br">E-mail</a>
-            <a class="btn" href="#servicos">Ver serviços</a>
+            <a class="btn ghost" href="#servicos">Ver serviços</a>
           </div>
         </div>
+
+        <footer>
+          <div class="container" style="padding:0;">
+            <div class="footer-grid">
+              <div>
+                <div style="font-weight:900; letter-spacing:.8px; text-transform:uppercase; color:rgba(245,245,243,.92);">
+                  Dalvi Guimarães Engenharia
+                </div>
+                <div style="margin-top:8px;">
+                  Projetos e estudos elétricos • Documentação técnica • BT/MT
+                </div>
+                <div style="margin-top:10px;">
+                  © <span id="year"></span> • Todos os direitos reservados.
+                </div>
+              </div>
+              <div class="footer-links">
+                <a href="#servicos">Serviços</a>
+                <a href="#processo">Processo</a>
+                <a href="#contato">Contato</a>
+                <a href="#" aria-disabled="true">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </section>
-
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <div style="font-weight:900; font-size:14px; letter-spacing:.2px;">Dalvi Guimarães Engenharia</div>
-            <div style="margin-top:8px; opacity:.92;">
-              Projetos e estudos elétricos • Documentação técnica • BT/MT
-            </div>
-            <div style="margin-top:10px; opacity:.82; font-size:12px;">
-              © <span id="year"></span> • Todos os direitos reservados.
-            </div>
-          </div>
-          <div class="footer-links">
-            <a href="#servicos">Serviços</a>
-            <a href="#processo">Processo</a>
-            <a href="#contato">Contato</a>
-            <a href="#" aria-disabled="true">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </footer>
   </main>
 
   <script>
