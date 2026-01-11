@@ -1,116 +1,959 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Dalvi Guimarães Engenharia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dalvi Guimarães Engenharia — Projetos elétricos, SPDA, aterramento, estudos e documentação técnica." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Swiper (slider) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
   <style>
     :root{
-      --bg:#0b0e14;
-      --text:#ffffff;
-      --muted:rgba(255,255,255,.75);
+      /* Sua identidade */
       --primary:#0f3a5f;
-      --font:'Montserrat', sans-serif;
+      --secondary:#1e5c8a;
+
+      /* Premium dark */
+      --bg:#070a10;
+      --bg2:#0b1220;
+      --text:#f5f5f3;
+      --muted:rgba(245,245,243,.75);
+      --line:rgba(245,245,243,.14);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.10);
+      --shadow: 0 18px 46px rgba(0,0,0,.45);
+
+      --font:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --radius:18px;
+      --radius-sm:12px;
+      --max: 1240px;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
+      margin:0;
       font-family:var(--font);
-      background:var(--bg);
       color:var(--text);
-    }
-
-    /* HERO */
-    .hero{
-      position:relative;
-      height:100vh;
-      width:100%;
-      overflow:hidden;
-    }
-
-    .hero video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter:brightness(.55);
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
       background:
-        linear-gradient(
-          180deg,
-          rgba(11,14,20,.55) 0%,
-          rgba(11,14,20,.85) 70%,
-          rgba(11,14,20,.95) 100%
-        );
+        radial-gradient(900px 520px at 18% -10%, rgba(30,92,138,.22), transparent 60%),
+        radial-gradient(900px 520px at 90% 0%, rgba(15,58,95,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+
+    /* ===== Top header ===== */
+    .top-header{
+      border-bottom:1px solid var(--line);
+      background: rgba(7,10,16,.55);
+      backdrop-filter: blur(10px);
+    }
+    .top-header .wrap{
+      display:flex; align-items:center; justify-content:flex-end;
+      gap: 18px;
+      padding: 10px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .top-header .link{
+      opacity:.9;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+    .top-header .link:hover{
+      opacity:1;
+      border-color: rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+    }
+    .call-btn{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,245,243,.18);
+      background: rgba(255,255,255,.04);
+      font-weight: 800;
+      letter-spacing: .4px;
+      color: var(--text);
+    }
+    .call-btn:hover{ background: rgba(255,255,255,.07); }
+
+    /* ===== Header / menu ===== */
+    header{
+      position:sticky; top:0; z-index: 60;
+      background: rgba(7,10,16,.62);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 12px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .logo{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(15,58,95,.95), rgba(30,92,138,.85));
+      border: 1px solid rgba(245,245,243,.16);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      font-weight: 900;
+      color: #fff;
+    }
+    .brand small{
+      display:block;
+      margin-top: 4px;
+      font-weight: 600;
+      letter-spacing: .25px;
+      color: var(--muted);
+      text-transform:none;
+    }
+    nav ul{
+      list-style:none; margin:0; padding:0;
+      display:flex; gap: 18px; align-items:center;
+    }
+    nav a{
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    nav a:hover{
+      color: var(--text);
+      border-color: rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
     }
 
-    .hero-content{
-      position:relative;
-      z-index:2;
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(245,245,243,.24);
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(15,58,95,.95), rgba(30,92,138,.85));
+      border-color: transparent;
+    }
+
+    /* ===== Banner (hero) ===== */
+    .banner-section{
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .banner-swiper,
+    .banner-swiper .swiper-wrapper,
+    .banner-swiper .swiper-slide{
       height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding: 0 8vw;
-      max-width: 1400px;
+    }
+    .banner-media{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+    }
+    .banner-media video{
+      width:100%; height:100%;
+      object-fit: cover;
+      filter: brightness(.55) saturate(1.08);
+    }
+    .banner-section::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,10,16,.55) 0%, rgba(7,10,16,.70) 50%, rgba(7,10,16,.92) 100%);
+      pointer-events:none;
     }
 
-    .hero h1{
-      font-size: clamp(36px, 5vw, 64px);
-      font-weight:600;
-      line-height:1.1;
-      max-width: 14ch;
-      margin-bottom: 24px;
-    }
-
-    .hero p{
-      font-size:16px;
-      color:var(--muted);
-      max-width: 38ch;
-    }
-
-    .scroll{
+    .banner-description{
       position:absolute;
-      bottom:40px;
-      left:50%;
-      transform:translateX(-50%);
-      font-size:12px;
-      letter-spacing:2px;
-      opacity:.7;
+      left: 0; right:0;
+      bottom: 30px;
+      z-index: 5;
+    }
+    .banner-boxes{
+      display:flex;
+      gap: 14px;
+      overflow:auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .banner-boxes::-webkit-scrollbar{ display:none; }
+
+    .banner-box{
+      min-width: 320px;
+      max-width: 360px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(245,245,243,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      cursor:pointer;
+      transition: border-color .2s ease, background .2s ease, transform .08s ease;
+    }
+    .banner-box:hover{
+      border-color: rgba(245,245,243,.28);
+      background: rgba(255,255,255,.08);
+    }
+    .banner-box.active{
+      border-color: rgba(30,92,138,.60);
+    }
+    .banner-title{
+      font-weight: 900;
+      letter-spacing: .4px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .banner-desc{
+      margin-top: 6px;
+      color: rgba(245,245,243,.78);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .banner-cta{
+      margin-top: 12px;
+      display:inline-flex;
+    }
+
+    .banner-pagination{
+      position:absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      z-index: 6;
+      width: auto !important;
+    }
+    .swiper-pagination-bullet{
+      background: rgba(245,245,243,.28);
+      opacity: 1;
+    }
+    .swiper-pagination-bullet-active{
+      background: rgba(30,92,138,.95);
+    }
+
+    /* ===== Sections ===== */
+    section.block{ padding: 60px 0; }
+    .section-title{
+      text-align:center;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: rgba(245,245,243,.92);
+    }
+    .tabs{
+      display:flex; justify-content:center; gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .tab{
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(255,255,255,.03);
+      color: rgba(245,245,243,.78);
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      font-size: 12px;
+      cursor:pointer;
+    }
+    .tab.active{
+      background: rgba(30,92,138,.18);
+      border-color: rgba(30,92,138,.55);
+      color: rgba(245,245,243,.92);
+    }
+
+    /* World slider cards */
+    .world-swiper .swiper-slide{ height:auto; }
+    .world-card{
+      position: relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      min-height: 340px;
+    }
+    .world-card img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      filter: brightness(.78) saturate(1.05);
+    }
+    .world-overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 0%, rgba(7,10,16,.40) 55%, rgba(7,10,16,.88) 100%);
+      display:flex;
+      align-items:flex-end;
+      padding: 18px;
+    }
+    .world-overlay .inner{
+      width:100%;
+    }
+    .world-overlay h3{
+      margin:0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .world-overlay p{
+      margin: 8px 0 12px;
+      color: rgba(245,245,243,.78);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .nav-arrows{
+      display:flex; gap: 10px; align-items:center;
+      justify-content:flex-end;
+      margin-top: 12px;
+    }
+    .arrow{
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(255,255,255,.04);
+      display:grid; place-items:center;
+      cursor:pointer;
+      user-select:none;
+      font-weight: 900;
+    }
+    .arrow:hover{ background: rgba(255,255,255,.07); }
+
+    /* Way of life tiles */
+    .tiles{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .tile{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      min-height: 360px;
+      cursor:pointer;
+    }
+    .tile img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      filter: brightness(.78);
+    }
+    .tile::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 0%, rgba(7,10,16,.45) 55%, rgba(7,10,16,.88) 100%);
+    }
+    .tile .label{
+      position:absolute; left: 18px; right: 18px; bottom: 18px;
+      z-index: 2;
+      font-weight: 900;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+    .tile .play{
+      position:absolute; right: 16px; top: 16px;
+      width: 52px; height: 52px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(245,245,243,.18);
+      display:grid; place-items:center;
+      z-index: 2;
+      font-weight: 900;
+    }
+
+    .tile-right{
+      display:grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 14px;
+    }
+    .tile.small{ min-height: 173px; }
+
+    /* Modal video */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+      z-index: 1000;
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width: min(980px, 100%);
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(245,245,243,.16);
+      background: rgba(7,10,16,.75);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+    .modal-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(245,245,243,.12);
+      color: rgba(245,245,243,.86);
+      font-weight: 900;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .modal-close{
+      cursor:pointer;
+      border: 1px solid rgba(245,245,243,.18);
+      background: rgba(255,255,255,.04);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight: 900;
+    }
+    .modal video{
+      width:100%;
+      height: min(70vh, 560px);
+      background:#000;
+      display:block;
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid rgba(245,245,243,.14);
+      padding: 34px 0 44px;
+      color: rgba(245,245,243,.72);
+      font-size: 12px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:start;
+    }
+    .footer-links{
+      display:flex; gap: 10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .footer-links a{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(245,245,243,.14);
+      background: rgba(255,255,255,.03);
+      font-weight: 900;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(245,245,243,.82);
+    }
+    .footer-links a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav ul{ display:none; }
+      .top-header .wrap{ justify-content:space-between; }
+      .banner-box{ min-width: 280px; }
+      .tiles{ grid-template-columns: 1fr; }
+      .tile-right{ grid-template-rows: auto; }
+      .footer-grid{ grid-template-columns: 1fr; }
+      .footer-links{ justify-content:flex-start; }
     }
   </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <!-- vídeo seu -->
-  <video autoplay muted loop playsinline>
-    <source src="assets/hero-video.mp4" type="video/mp4">
-  </video>
-
-  <div class="hero-content">
-    <h1>Engineering
-    that structures
-    the future.</h1>
-
-    <p>
-      Projetos elétricos e estudos técnicos
-      para empreendimentos de alto nível.
-    </p>
+  <!-- Top header -->
+  <div class="top-header">
+    <div class="container">
+      <div class="wrap">
+        <a class="link" href="#servicos">Serviços</a>
+        <a class="link" href="#cases">Portfólio</a>
+        <a class="link" href="#contato">Contato</a>
+        <a class="call-btn" href="tel:+55SEUNUMEROAQUI">📞 (XX) XXXXX-XXXX</a>
+      </div>
+    </div>
   </div>
 
-  <div class="scroll">SCROLL</div>
-</section>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Ir para o topo">
+          <div class="logo">DG</div>
+          <div>
+            Dalvi Guimarães Engenharia
+            <small>Projetos e estudos elétricos • BT/MT • SPDA e aterramento</small>
+          </div>
+        </a>
 
+        <nav aria-label="Navegação principal">
+          <ul>
+            <li><a href="#top">Home</a></li>
+            <li><a href="#world">Destaques</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#contato">Orçamento</a></li>
+          </ul>
+        </nav>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn" href="#servicos">Ver serviços</a>
+          <a class="btn primary" href="#contato">Falar com a engenharia</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner section (videos slider) -->
+  <main id="top">
+    <section class="banner-section" aria-label="Banner">
+      <div class="swiper banner-swiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="banner-media">
+              <video playsinline muted autoplay loop preload="metadata" data-index="0" id="heroVideo0">
+                <source src="assets/hero-1.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="banner-media">
+              <video playsinline muted preload="metadata" data-index="1" id="heroVideo1">
+                <source src="assets/hero-2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="banner-media">
+              <video playsinline muted preload="metadata" data-index="2" id="heroVideo2">
+                <source src="assets/hero-3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-pagination banner-pagination"></div>
+      </div>
+
+      <!-- Boxes (igual conceito Nakheel) -->
+      <div class="banner-description">
+        <div class="container">
+          <div class="banner-boxes" id="bannerBoxes">
+            <div class="banner-box active" data-slide="0">
+              <div class="banner-title">Projetos Elétricos BT/MT</div>
+              <div class="banner-desc">Documentação clara, rastreável e pronta para execução.</div>
+              <div class="banner-cta"><a class="btn primary" href="#servicos">Descobrir</a></div>
+            </div>
+
+            <div class="banner-box" data-slide="1">
+              <div class="banner-title">SPDA e Aterramento</div>
+              <div class="banner-desc">Premissas normativas e detalhamento executivo.</div>
+            </div>
+
+            <div class="banner-box" data-slide="2">
+              <div class="banner-title">Laudos e Estudos</div>
+              <div class="banner-desc">Diagnóstico técnico, não conformidades e recomendações.</div>
+              <div class="banner-cta"><a class="btn primary" href="#contato">Solicitar orçamento</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- World / Destaques -->
+    <section id="world" class="block">
+      <div class="container">
+        <div class="section-title">Destaques</div>
+
+        <div class="tabs" role="tablist" aria-label="Filtro">
+          <button class="tab active" data-filter="new" type="button">NOVO</button>
+          <button class="tab" data-filter="live" type="button">EM OPERAÇÃO</button>
+        </div>
+
+        <div class="swiper world-swiper">
+          <div class="swiper-wrapper" id="worldWrapper">
+            <!-- NEW -->
+            <div class="swiper-slide" data-cat="new">
+              <div class="world-card">
+                <img src="assets/world-1.jpg" alt="Projetos BT/MT">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Projetos BT/MT</h3>
+                    <p>Unifilar, layout, detalhamento e compatibilização para obra.</p>
+                    <a class="btn" href="#servicos">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide" data-cat="new">
+              <div class="world-card">
+                <img src="assets/world-2.jpg" alt="SPDA e Aterramento">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>SPDA & Aterramento</h3>
+                    <p>Projeto e adequações com premissas claras e rastreáveis.</p>
+                    <a class="btn" href="#servicos">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LIVE -->
+            <div class="swiper-slide" data-cat="live">
+              <div class="world-card">
+                <img src="assets/world-3.jpg" alt="Laudos">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Laudos e Inspeções</h3>
+                    <p>Relatório técnico, evidências e plano de adequação.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide" data-cat="live">
+              <div class="world-card">
+                <img src="assets/world-4.jpg" alt="Estudos">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Estudos Técnicos</h3>
+                    <p>Curto-circuito, coordenação, verificações e recomendações.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+
+        <div class="nav-arrows">
+          <div class="arrow" id="worldPrev">‹</div>
+          <div class="arrow" id="worldNext">›</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Way of life (vira "Como entregamos") -->
+    <section class="block" id="cases">
+      <div class="container">
+        <div class="section-title">Como entregamos</div>
+
+        <div class="tiles">
+          <div class="tile" data-video="assets/tile-1.mp4" data-title="Engenharia aplicada">
+            <img src="assets/tile-1.jpg" alt="Engenharia aplicada">
+            <div class="play">▶</div>
+            <div class="label">Engenharia aplicada</div>
+          </div>
+
+          <div class="tile-right">
+            <div class="tile small" data-video="assets/tile-2.mp4" data-title="Rastreabilidade e padrão">
+              <img src="assets/tile-2.jpg" alt="Rastreabilidade e padrão">
+              <div class="play">▶</div>
+              <div class="label">Rastreabilidade e padrão</div>
+            </div>
+
+            <div class="tile small" data-video="assets/tile-3.mp4" data-title="Documentação pronta para obra">
+              <img src="assets/tile-3.jpg" alt="Documentação pronta para obra">
+              <div class="play">▶</div>
+              <div class="label">Documentação pronta para obra</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Serviços (carrossel estilo "new launches") -->
+    <section class="block" id="servicos">
+      <div class="container">
+        <div class="section-title">Serviços</div>
+
+        <div class="swiper services-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="world-card">
+                <img src="assets/service-1.jpg" alt="Projetos BT/MT">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Projetos elétricos BT/MT</h3>
+                    <p>Distribuição, quadros, alimentadores, unifilar, detalhamento e compatibilização.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="world-card">
+                <img src="assets/service-2.jpg" alt="SPDA e aterramento">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>SPDA e aterramento</h3>
+                    <p>Dimensionamento e documentação conforme premissas normativas e execução.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="world-card">
+                <img src="assets/service-3.jpg" alt="Laudos e inspeções">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Laudos e inspeções</h3>
+                    <p>Vistorias, evidências, não conformidades e recomendações de adequação.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="world-card">
+                <img src="assets/service-4.jpg" alt="Estudos técnicos">
+                <div class="world-overlay">
+                  <div class="inner">
+                    <h3>Estudos técnicos</h3>
+                    <p>Curto-circuito, coordenação, ajustes e verificações conforme objetivo.</p>
+                    <a class="btn" href="#contato">DISCOVER MORE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato / CTA -->
+    <section class="block" id="contato">
+      <div class="container">
+        <div class="section-title">Contato</div>
+
+        <div style="border:1px solid rgba(245,245,243,.14); border-radius:var(--radius); padding:18px; background:rgba(255,255,255,.03);">
+          <p style="margin:0 0 14px; color:rgba(245,245,243,.78); line-height:1.6;">
+            Envie um resumo do objetivo, localização e documentos disponíveis (diagrama, fotos, padrão da concessionária).
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn" href="mailto:contato@dalviguimaraes.eng.br">E-mail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div style="font-weight:900; letter-spacing:.8px; text-transform:uppercase; color:rgba(245,245,243,.92);">
+              Dalvi Guimarães Engenharia
+            </div>
+            <div style="margin-top:8px;">
+              Projetos e estudos elétricos • Documentação técnica • BT/MT
+            </div>
+            <div style="margin-top:10px;">
+              © <span id="year"></span> • Todos os direitos reservados.
+            </div>
+          </div>
+          <div class="footer-links">
+            <a href="#world">Destaques</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#contato">Contato</a>
+            <a href="#" aria-disabled="true">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modal video -->
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Vídeo">
+      <div class="modal-head">
+        <span id="modalTitle">Vídeo</span>
+        <button class="modal-close" id="modalClose" type="button">Fechar</button>
+      </div>
+      <video id="modalVideo" controls playsinline></video>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Banner Swiper (videos)
+    const bannerSwiper = new Swiper(".banner-swiper", {
+      loop: true,
+      speed: 900,
+      autoplay: { delay: 9000, disableOnInteraction: false },
+      pagination: { el: ".banner-pagination", clickable: true }
+    });
+
+    // Sincroniza boxes com slider
+    const boxes = Array.from(document.querySelectorAll(".banner-box"));
+    function setActiveBox(realIndex){
+      boxes.forEach(b => b.classList.remove("active"));
+      const match = boxes.find(b => Number(b.dataset.slide) === realIndex);
+      if (match) match.classList.add("active");
+    }
+    boxes.forEach(b => {
+      b.addEventListener("click", () => {
+        bannerSwiper.slideToLoop(Number(b.dataset.slide));
+      });
+    });
+
+    // Play/stop videos conforme slide (somente o ativo em loop)
+    const heroVideos = [
+      document.getElementById("heroVideo0"),
+      document.getElementById("heroVideo1"),
+      document.getElementById("heroVideo2")
+    ];
+
+    function pauseAll(){
+      heroVideos.forEach(v => { try{ v.pause(); }catch(e){} });
+    }
+    function playOnly(idx){
+      pauseAll();
+      const v = heroVideos[idx];
+      if (!v) return;
+      v.currentTime = 0;
+      v.play().catch(()=>{});
+    }
+
+    bannerSwiper.on("slideChange", () => {
+      // realIndex 0..2
+      const real = bannerSwiper.realIndex;
+      setActiveBox(real);
+      playOnly(real);
+    });
+
+    // Inicial
+    setActiveBox(bannerSwiper.realIndex);
+    playOnly(bannerSwiper.realIndex);
+
+    // World Swiper
+    const worldSwiper = new Swiper(".world-swiper", {
+      slidesPerView: 1.1,
+      spaceBetween: 14,
+      breakpoints: {
+        680: { slidesPerView: 2.1 },
+        980: { slidesPerView: 3.1 }
+      },
+      navigation: { nextEl: ".world-swiper .swiper-button-next", prevEl: ".world-swiper .swiper-button-prev" }
+    });
+
+    document.getElementById("worldPrev").addEventListener("click", () => worldSwiper.slidePrev());
+    document.getElementById("worldNext").addEventListener("click", () => worldSwiper.slideNext());
+
+    // Tabs filter
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const slides = Array.from(document.querySelectorAll("#worldWrapper .swiper-slide"));
+    function applyFilter(cat){
+      slides.forEach(s => {
+        s.style.display = (s.dataset.cat === cat) ? "" : "none";
+      });
+      worldSwiper.update();
+      worldSwiper.slideTo(0);
+    }
+    tabs.forEach(t => {
+      t.addEventListener("click", () => {
+        tabs.forEach(x => x.classList.remove("active"));
+        t.classList.add("active");
+        applyFilter(t.dataset.filter);
+      });
+    });
+    applyFilter("new");
+
+    // Services Swiper
+    const servicesSwiper = new Swiper(".services-swiper", {
+      slidesPerView: 1.1,
+      spaceBetween: 14,
+      breakpoints: {
+        680: { slidesPerView: 2.1 },
+        980: { slidesPerView: 3.1 }
+      },
+      navigation: { nextEl: ".services-swiper .swiper-button-next", prevEl: ".services-swiper .swiper-button-prev" }
+    });
+
+    // Tiles -> modal video
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeBtn = document.getElementById("modalClose");
+
+    function openModal(src, title){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+      modalTitle.textContent = title || "Vídeo";
+      modalVideo.src = src;
+      modalVideo.play().catch(()=>{});
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      modalVideo.pause();
+      modalVideo.removeAttribute("src");
+      modalVideo.load();
+    }
+
+    document.querySelectorAll(".tile").forEach(tile => {
+      tile.addEventListener("click", () => {
+        openModal(tile.dataset.video, tile.dataset.title);
+      });
+    });
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+  </script>
 </body>
 </html>
